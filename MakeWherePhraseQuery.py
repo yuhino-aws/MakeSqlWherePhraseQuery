@@ -32,7 +32,7 @@ class MakeWherePhraseQuery():
 
         try:
             #出力内容初期化
-            output = ""
+            message.delete("1.0", "end")
 
             #入力内容取得
             codes = input.get("1.0", "end -1c")
@@ -55,7 +55,8 @@ class MakeWherePhraseQuery():
             self.outputItemInfo(f"エラーが発生しました。エラー内容: {error}")
 
     def outputItemInfo(self, text):
-        where_phrase.set(text)
+        #where_phrase.set(text)
+        message.insert('end', text)
 
 ########################################################################
 ###########フロント
@@ -69,6 +70,9 @@ root.geometry("700x700")
 where_phrase = tkinter.StringVar()
 where_phrase.set("出力箇所")
 
+title_label = tkinter.Label(root,text="Codes")
+title_label.pack()
+
 input = tkinter.Text(width="30", height="10")
 input.pack()
 
@@ -78,7 +82,7 @@ button.pack(pady=20)
 where_phrase_label = tkinter.Label(root,text="Where Phrase")
 where_phrase_label.pack()
 
-message = tkinter.Message(root,textvariable= where_phrase,bg="white", aspect = 2000)
+message = tkinter.Text(root)
 message.pack()
 
 root.mainloop()
